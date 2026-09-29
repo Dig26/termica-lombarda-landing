@@ -18,6 +18,8 @@
   <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/form.js" defer></script>
+  <script src="js/dati-inverno.js" defer></script>
+  <script src="js/inverno.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenuto">Vai al contenuto</a>
@@ -37,20 +39,110 @@
 
   <main id="contenuto">
     <section class="hero" id="top">
-      <div class="container hero__grid">
+      <div class="container">
         <div class="hero__text">
           <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
-          <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
-          <p class="hero__season">
-            <time class="hero__date" datetime="2026-10-15">15 ottobre</time>
-            <span>A Milano si accendono i riscaldamenti. Il sopralluogo richiede un'ora e non costa nulla.</span>
+          <div class="hero__side">
+            <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
+            <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
+          </div>
+        </div>
+
+        <!-- L'inverno scorso a Milano: fascia interattiva costruita da js/inverno.js con i dati di js/dati-inverno.js -->
+        <figure class="inverno" aria-labelledby="inverno-titolo">
+          <div class="inverno__head">
+            <h2 class="inverno__title" id="inverno-titolo">L'inverno scorso a Milano, giorno per giorno</h2>
+            <p class="inverno__summary">Per <strong id="giorni-pdc">165</strong> giorni su <span id="giorni-totali">183</span> sarebbe bastata la pompa di calore. La caldaia sarebbe servita solo nei <strong id="giorni-caldaia">18</strong> giorni più freddi, quelli in rosso.</p>
+          </div>
+
+          <div class="inverno__stage" id="inverno-stage">
+            <svg class="impianto" viewBox="0 0 640 240" aria-hidden="true">
+              <!-- Tubi: mandata in alto (verso destra), ritorno in basso (verso sinistra) -->
+              <g class="impianto__tubi" fill="none" stroke-width="8" stroke-linecap="round">
+                <path class="tubo tubo--mandata" d="M170 70 H250 M370 70 H462"/>
+                <path class="tubo tubo--ritorno" d="M462 150 H370 M250 150 H170"/>
+                <path class="flusso" d="M170 70 H250 M370 70 H462"/>
+              </g>
+
+              <!-- Pompa di calore: la ventola gira quando lavora -->
+              <g class="impianto__pezzo">
+                <rect x="20" y="40" width="150" height="140" rx="6"/>
+                <circle cx="80" cy="110" r="40"/>
+                <rect x="132" y="60" width="24" height="100" rx="3" class="impianto__dettaglio"/>
+              </g>
+              <g class="ventola">
+                <path d="M80 110 C70 90 76 76 88 74 C92 88 88 100 80 110 Z"/>
+                <path d="M80 110 C102 108 112 120 108 131 C94 130 86 120 80 110 Z"/>
+                <path d="M80 110 C68 128 52 130 46 120 C54 108 68 106 80 110 Z"/>
+              </g>
+
+              <!-- Caldaia a condensazione: la fiamma si accende solo nei giorni freddi -->
+              <g class="impianto__pezzo">
+                <rect x="250" y="20" width="120" height="180" rx="6"/>
+                <rect x="275" y="42" width="70" height="26" rx="3" class="impianto__dettaglio"/>
+                <rect x="282" y="100" width="56" height="72" rx="6" class="impianto__dettaglio"/>
+              </g>
+              <path class="fiamma" d="M312 104 C314 118 330 126 330 146 C330 159 321 166 310 166 C299 166 290 159 290 147 C290 136 296 130 299 122 C301 131 304 135 307 136 C304 124 306 112 312 104 Z"/>
+
+              <!-- Termosifoni -->
+              <g class="impianto__pezzo">
+                <rect x="470" y="50" width="22" height="120" rx="11"/>
+                <rect x="498" y="50" width="22" height="120" rx="11"/>
+                <rect x="526" y="50" width="22" height="120" rx="11"/>
+                <rect x="554" y="50" width="22" height="120" rx="11"/>
+                <rect x="582" y="50" width="22" height="120" rx="11"/>
+              </g>
+
+              <g class="impianto__etichette">
+                <text x="95" y="228" text-anchor="middle">Pompa di calore</text>
+                <text x="310" y="228" text-anchor="middle">Caldaia</text>
+                <text x="537" y="228" text-anchor="middle">Termosifoni</text>
+              </g>
+            </svg>
+
+            <div class="inverno__readout">
+              <p class="inverno__date" id="inverno-data">Seleziona un giorno</p>
+              <dl class="inverno__temps">
+                <div><dt>Media</dt><dd id="t-media">–</dd></div>
+                <div><dt>Minima</dt><dd id="t-minima">–</dd></div>
+                <div><dt>Massima</dt><dd id="t-massima">–</dd></div>
+              </dl>
+              <p class="inverno__state" id="inverno-stato"></p>
+            </div>
+          </div>
+
+          <div class="inverno__strip" id="inverno-strip">
+            <svg class="inverno__bars" id="inverno-barre" viewBox="0 0 183 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="inverno__marker" id="inverno-cursore" aria-hidden="true"></div>
+            <label class="visually-hidden" for="inverno-giorno">Scegli un giorno dell'inverno</label>
+            <input class="inverno__range" id="inverno-giorno" type="range" min="0" max="182" step="1" value="0">
+          </div>
+          <div class="inverno__months" id="inverno-mesi" aria-hidden="true"></div>
+
+          <figcaption class="inverno__caption">
+            <p class="inverno__legend">
+              <span class="legend legend--mandata">La caldaia aiuta: media del giorno sotto i 3 °C</span>
+              <span class="legend legend--ritorno">Basta la pompa di calore</span>
+            </p>
+            <p>Trascina sulla fascia per scegliere un giorno. Più la barra è alta, più quel giorno serviva scaldare.</p>
+            <p class="inverno__source">La soglia di 3 °C è un esempio: nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--white" id="sopralluogo" aria-labelledby="prenota-titolo">
+      <div class="container prenota">
+        <div class="prenota__text">
+          <h2 id="prenota-titolo">Prenota il sopralluogo gratuito</h2>
+          <p>Un tecnico controlla il tuo impianto e ti dice quanto puoi recuperare con il Conto Termico 3.0. Nessun costo, nessun impegno.</p>
+          <p class="season">
+            <time class="season__date" datetime="2026-10-15">15 ottobre</time>
+            <span>A Milano si accendono i riscaldamenti. Il sopralluogo dura un'ora: meglio farlo prima.</span>
           </p>
         </div>
 
-        <div class="form-panel" id="sopralluogo">
-          <h2 class="form-panel__title">Prenota il sopralluogo gratuito</h2>
-          <p class="form-panel__intro">Un tecnico controlla il tuo impianto e ti dice quanto puoi recuperare. Nessun costo, nessun impegno.</p>
-
+        <div class="form-panel">
           <!-- method="dialog": fuori da un <dialog> il browser non invia i dati da nessuna parte, anche senza JavaScript -->
           <form class="form" id="form-sopralluogo" method="dialog">
             <div class="field">
@@ -128,72 +220,11 @@
     </section>
 
     <section class="section section--white" aria-labelledby="ibrido-titolo">
-      <div class="container hybrid">
-        <div class="hybrid__text">
-          <h2 id="ibrido-titolo">Come funziona un sistema ibrido</h2>
-          <p>Una pompa di calore e una caldaia a condensazione lavorano insieme, comandate da un'unica centralina.</p>
-          <p>La pompa di calore prende energia dall'aria esterna e fa la maggior parte del lavoro. Quando fuori fa molto freddo e renderebbe meno, la centralina accende la caldaia.</p>
-          <p>Nella maggior parte dei casi tieni i termosifoni che hai già. Lo verifichiamo al sopralluogo.</p>
-        </div>
-
-        <figure class="schema">
-          <svg viewBox="0 0 640 280" role="img" aria-labelledby="schema-titolo schema-desc">
-            <title id="schema-titolo">Schema di un sistema ibrido</title>
-            <desc id="schema-desc">La pompa di calore all'esterno e la caldaia a condensazione mandano acqua calda ai termosifoni con il tubo di mandata. L'acqua raffreddata torna indietro con il tubo di ritorno.</desc>
-            <defs>
-              <marker id="freccia-mandata" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
-                <path d="M0 0 L10 5 L0 10 z" fill="#C2361B"/>
-              </marker>
-              <marker id="freccia-ritorno" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
-                <path d="M0 0 L10 5 L0 10 z" fill="#2F5D8C"/>
-              </marker>
-            </defs>
-
-            <!-- Tubi: mandata in alto (verso destra), ritorno in basso (verso sinistra) -->
-            <g fill="none" stroke-width="8" stroke-linecap="round">
-              <path d="M170 90 H250" stroke="#C2361B" marker-end="url(#freccia-mandata)"/>
-              <path d="M370 90 H460" stroke="#C2361B" marker-end="url(#freccia-mandata)"/>
-              <path d="M460 170 H370" stroke="#2F5D8C" marker-end="url(#freccia-ritorno)"/>
-              <path d="M250 170 H170" stroke="#2F5D8C" marker-end="url(#freccia-ritorno)"/>
-            </g>
-
-            <!-- Pompa di calore (unità esterna) -->
-            <g class="schema__device">
-              <rect x="20" y="60" width="150" height="140" rx="6"/>
-              <circle cx="80" cy="130" r="40"/>
-              <path d="M80 94 V166 M44 130 H116" class="schema__detail"/>
-              <rect x="132" y="80" width="24" height="100" rx="3" class="schema__detail"/>
-            </g>
-
-            <!-- Caldaia a condensazione -->
-            <g class="schema__device">
-              <rect x="250" y="40" width="120" height="180" rx="6"/>
-              <rect x="275" y="70" width="70" height="28" rx="3" class="schema__detail"/>
-              <circle cx="310" cy="150" r="16" class="schema__detail"/>
-            </g>
-
-            <!-- Termosifone -->
-            <g class="schema__device">
-              <rect x="470" y="70" width="22" height="120" rx="11"/>
-              <rect x="498" y="70" width="22" height="120" rx="11"/>
-              <rect x="526" y="70" width="22" height="120" rx="11"/>
-              <rect x="554" y="70" width="22" height="120" rx="11"/>
-              <rect x="582" y="70" width="22" height="120" rx="11"/>
-            </g>
-
-            <g class="schema__label">
-              <text x="95" y="245" text-anchor="middle">Pompa di calore</text>
-              <text x="95" y="266" text-anchor="middle" class="schema__sub">all'esterno</text>
-              <text x="310" y="245" text-anchor="middle">Caldaia a condensazione</text>
-              <text x="537" y="245" text-anchor="middle">Termosifoni</text>
-              <text x="537" y="266" text-anchor="middle" class="schema__sub">quelli che hai</text>
-            </g>
-          </svg>
-          <figcaption class="schema__legend">
-            <span class="legend legend--mandata">Mandata: acqua calda verso casa</span>
-            <span class="legend legend--ritorno">Ritorno: acqua da riscaldare</span>
-          </figcaption>
-        </figure>
+      <div class="container container--narrow">
+        <h2 id="ibrido-titolo">Come funziona un sistema ibrido</h2>
+        <p>Una pompa di calore e una caldaia a condensazione lavorano insieme, comandate da un'unica centralina.</p>
+        <p>La pompa di calore prende energia dall'aria esterna e fa la maggior parte del lavoro. Quando fuori fa molto freddo e renderebbe meno, la centralina accende la caldaia: sono i giorni in rosso nella fascia in alto.</p>
+        <p>Nella maggior parte dei casi tieni i termosifoni che hai già. Lo verifichiamo al sopralluogo.</p>
       </div>
     </section>
 
