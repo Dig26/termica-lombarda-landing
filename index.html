@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema ibrido con il Conto Termico 3.0 a Milano | Termica Lombarda</title>
+  <meta name="description" content="Sostituisci la vecchia caldaia con un sistema ibrido prima dell'inverno: fino al 65% rimborsato con il Conto Termico 3.0. La pratica la gestiamo noi. Prenota il sopralluogo gratuito.">
+  <!-- Azienda immaginaria: la pagina non deve finire nei risultati di ricerca -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#E9EDF0">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Cambia la caldaia prima che si accendano i termosifoni">
+  <meta property="og:description" content="Sistema ibrido con fino al 65% rimborsato dal Conto Termico 3.0. Sopralluogo gratuito a Milano e provincia.">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/form.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#top" aria-label="Termica Lombarda, torna all'inizio">
+        <svg class="logo__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="5" rx="2.5" fill="#C2361B"/>
+          <rect x="3" y="15" width="18" height="5" rx="2.5" fill="#2F5D8C"/>
+        </svg>
+        Termica Lombarda
+      </a>
+      <a class="button button--small" href="#sopralluogo">Prenota<span class="hide-small"> il sopralluogo</span></a>
+    </div>
+  </header>
+
+  <main id="contenuto">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
+          <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
+          <p class="hero__season">
+            <time class="hero__date" datetime="2026-10-15">15 ottobre</time>
+            <span>A Milano si accendono i riscaldamenti. Il sopralluogo richiede un'ora e non costa nulla.</span>
+          </p>
+        </div>
+
+        <div class="form-panel" id="sopralluogo">
+          <h2 class="form-panel__title">Prenota il sopralluogo gratuito</h2>
+          <p class="form-panel__intro">Un tecnico controlla il tuo impianto e ti dice quanto puoi recuperare. Nessun costo, nessun impegno.</p>
+
+          <!-- method="dialog": fuori da un <dialog> il browser non invia i dati da nessuna parte, anche senza JavaScript -->
+          <form class="form" id="form-sopralluogo" method="dialog">
+            <div class="field">
+              <label for="nome">Nome e cognome</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" required
+                     aria-describedby="nome-errore"
+                     data-msg-missing="Scrivi nome e cognome.">
+              <p class="field__error" id="nome-errore" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="telefono">Telefono</label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required
+                     pattern="\+?[0-9 ]{8,16}"
+                     aria-describedby="telefono-errore"
+                     data-msg-missing="Scrivi un numero di telefono: ti chiamiamo per fissare l'appuntamento."
+                     data-msg-invalid="Usa solo numeri, almeno 8 cifre. Esempio: 333 123 4567.">
+              <p class="field__error" id="telefono-errore" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Email <span class="field__optional">(facoltativa)</span></label>
+              <input id="email" name="email" type="email" autocomplete="email"
+                     aria-describedby="email-errore"
+                     data-msg-invalid="Controlla l'indirizzo email. Esempio: nome@dominio.it.">
+              <p class="field__error" id="email-errore" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="comune">Comune</label>
+              <input id="comune" name="comune" type="text" autocomplete="address-level2" required
+                     aria-describedby="comune-errore"
+                     data-msg-missing="Scrivi il comune dove si trova la casa.">
+              <p class="field__error" id="comune-errore" aria-live="polite"></p>
+            </div>
+
+            <div class="field field--check">
+              <input id="privacy" name="privacy" type="checkbox" required
+                     aria-describedby="privacy-errore"
+                     data-msg-missing="Serve il consenso per poterti ricontattare.">
+              <label for="privacy">Acconsento a essere ricontattato per il sopralluogo, secondo l'informativa privacy.</label>
+              <p class="field__error" id="privacy-errore" aria-live="polite"></p>
+            </div>
+
+            <button class="button button--full" type="submit">Prenota il sopralluogo</button>
+          </form>
+
+          <div class="form-success" id="form-success" tabindex="-1" hidden>
+            <h3>Sopralluogo prenotato</h3>
+            <p>Ti chiamiamo entro un giorno lavorativo per fissare data e ora.</p>
+            <p class="form-success__note">Questo è un sito dimostrativo: nessun dato è stato inviato.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="perche-titolo">
+      <div class="container">
+        <h2 id="perche-titolo">Perché conviene farlo adesso</h2>
+        <ul class="reasons">
+          <li>
+            <h3>La caldaia a gas da sola non ha più incentivi</h3>
+            <p>Dal 2025 le caldaie a gas tradizionali non sono più incentivate. I sistemi ibridi sì: è l'unico modo per cambiare caldaia e farsi rimborsare una parte importante della spesa.</p>
+          </li>
+          <li>
+            <h3>Il rimborso arriva sul conto corrente</h3>
+            <p>Il Conto Termico 3.0 non è una detrazione da spalmare in dieci anni di dichiarazioni dei redditi. È un bonifico del GSE, fino al 65% di quanto hai speso.</p>
+          </li>
+          <li>
+            <h3>In inverno i tecnici sono tutti impegnati</h3>
+            <p>A stagione iniziata le installazioni si allungano e restare senza riscaldamento anche un giorno pesa di più. Prima dell'accensione è il momento più semplice.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--white" aria-labelledby="ibrido-titolo">
+      <div class="container hybrid">
+        <div class="hybrid__text">
+          <h2 id="ibrido-titolo">Come funziona un sistema ibrido</h2>
+          <p>Una pompa di calore e una caldaia a condensazione lavorano insieme, comandate da un'unica centralina.</p>
+          <p>La pompa di calore prende energia dall'aria esterna e fa la maggior parte del lavoro. Quando fuori fa molto freddo e renderebbe meno, la centralina accende la caldaia.</p>
+          <p>Nella maggior parte dei casi tieni i termosifoni che hai già. Lo verifichiamo al sopralluogo.</p>
+        </div>
+
+        <figure class="schema">
+          <svg viewBox="0 0 640 280" role="img" aria-labelledby="schema-titolo schema-desc">
+            <title id="schema-titolo">Schema di un sistema ibrido</title>
+            <desc id="schema-desc">La pompa di calore all'esterno e la caldaia a condensazione mandano acqua calda ai termosifoni con il tubo di mandata. L'acqua raffreddata torna indietro con il tubo di ritorno.</desc>
+            <defs>
+              <marker id="freccia-mandata" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#C2361B"/>
+              </marker>
+              <marker id="freccia-ritorno" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#2F5D8C"/>
+              </marker>
+            </defs>
+
+            <!-- Tubi: mandata in alto (verso destra), ritorno in basso (verso sinistra) -->
+            <g fill="none" stroke-width="8" stroke-linecap="round">
+              <path d="M170 90 H250" stroke="#C2361B" marker-end="url(#freccia-mandata)"/>
+              <path d="M370 90 H460" stroke="#C2361B" marker-end="url(#freccia-mandata)"/>
+              <path d="M460 170 H370" stroke="#2F5D8C" marker-end="url(#freccia-ritorno)"/>
+              <path d="M250 170 H170" stroke="#2F5D8C" marker-end="url(#freccia-ritorno)"/>
+            </g>
+
+            <!-- Pompa di calore (unità esterna) -->
+            <g class="schema__device">
+              <rect x="20" y="60" width="150" height="140" rx="6"/>
+              <circle cx="80" cy="130" r="40"/>
+              <path d="M80 94 V166 M44 130 H116" class="schema__detail"/>
+              <rect x="132" y="80" width="24" height="100" rx="3" class="schema__detail"/>
+            </g>
+
+            <!-- Caldaia a condensazione -->
+            <g class="schema__device">
+              <rect x="250" y="40" width="120" height="180" rx="6"/>
+              <rect x="275" y="70" width="70" height="28" rx="3" class="schema__detail"/>
+              <circle cx="310" cy="150" r="16" class="schema__detail"/>
+            </g>
+
+            <!-- Termosifone -->
+            <g class="schema__device">
+              <rect x="470" y="70" width="22" height="120" rx="11"/>
+              <rect x="498" y="70" width="22" height="120" rx="11"/>
+              <rect x="526" y="70" width="22" height="120" rx="11"/>
+              <rect x="554" y="70" width="22" height="120" rx="11"/>
+              <rect x="582" y="70" width="22" height="120" rx="11"/>
+            </g>
+
+            <g class="schema__label">
+              <text x="95" y="245" text-anchor="middle">Pompa di calore</text>
+              <text x="95" y="266" text-anchor="middle" class="schema__sub">all'esterno</text>
+              <text x="310" y="245" text-anchor="middle">Caldaia a condensazione</text>
+              <text x="537" y="245" text-anchor="middle">Termosifoni</text>
+              <text x="537" y="266" text-anchor="middle" class="schema__sub">quelli che hai</text>
+            </g>
+          </svg>
+          <figcaption class="schema__legend">
+            <span class="legend legend--mandata">Mandata: acqua calda verso casa</span>
+            <span class="legend legend--ritorno">Ritorno: acqua da riscaldare</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="percorso-titolo">
+      <div class="container">
+        <h2 id="percorso-titolo">Dal sopralluogo al rimborso</h2>
+        <p class="section__intro">Ti seguiamo in ogni passaggio. L'unica cosa che fai tu è scegliere la data del sopralluogo.</p>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__node" aria-hidden="true">1</span>
+            <h3>Sopralluogo gratuito</h3>
+            <p>Un nostro tecnico controlla la caldaia attuale, i termosifoni e dove mettere l'unità esterna.</p>
+          </li>
+          <li class="step">
+            <span class="step__node" aria-hidden="true">2</span>
+            <h3>Preventivo e verifica dei requisiti</h3>
+            <p>Ricevi un preventivo scritto con la cifra che puoi recuperare dal Conto Termico 3.0.</p>
+          </li>
+          <li class="step">
+            <span class="step__node" aria-hidden="true">3</span>
+            <h3>Installazione</h3>
+            <p>Togliamo la vecchia caldaia, installiamo il sistema ibrido e ti mostriamo come usare la centralina.</p>
+          </li>
+          <li class="step">
+            <span class="step__node" aria-hidden="true">4</span>
+            <h3>Pratica al GSE</h3>
+            <p>Prepariamo e inviamo noi la domanda sul portale del GSE, entro i 90 giorni dalla fine dei lavori.</p>
+          </li>
+          <li class="step step--last">
+            <span class="step__node" aria-hidden="true">5</span>
+            <h3>Rimborso sul conto corrente</h3>
+            <p>Il GSE ti accredita l'incentivo con un bonifico: fino al 65% della spesa.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--white" aria-labelledby="faq-titolo">
+      <div class="container container--narrow">
+        <h2 id="faq-titolo">Domande frequenti</h2>
+        <div class="faq">
+          <details>
+            <summary>Chi può chiedere il Conto Termico 3.0?</summary>
+            <p>I privati che sostituiscono un impianto di riscaldamento esistente con uno più efficiente, come un sistema ibrido con i requisiti tecnici richiesti dal GSE. Al sopralluogo verifichiamo se il tuo caso rientra.</p>
+          </details>
+          <details>
+            <summary>Il sopralluogo mi impegna a qualcosa?</summary>
+            <p>No. È gratuito e senza impegno: se il preventivo non ti convince, finisce lì.</p>
+          </details>
+          <details>
+            <summary>Posso tenere i termosifoni che ho?</summary>
+            <p>Nella maggior parte dei casi sì: il sistema ibrido funziona anche con i termosifoni tradizionali. Lo controlliamo durante il sopralluogo.</p>
+          </details>
+          <details>
+            <summary>Quando arriva il rimborso?</summary>
+            <p>Dipende dall'importo e dai tempi del GSE. Per gli interventi su una casa di solito arriva in un'unica rata, qualche mese dopo l'accettazione della domanda.</p>
+          </details>
+          <details>
+            <summary>Devo anticipare la spesa?</summary>
+            <p>Di norma paghi l'intervento e ricevi il rimborso dopo l'accettazione della pratica. Al sopralluogo vediamo insieme le modalità di pagamento.</p>
+          </details>
+          <details>
+            <summary>Quali documenti servono per la pratica?</summary>
+            <p>Documento d'identità, codice fiscale, IBAN e i dati catastali della casa. Il resto lo prepariamo noi.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" aria-labelledby="cta-titolo">
+      <div class="container">
+        <h2 id="cta-titolo">Prenota prima dell'accensione</h2>
+        <p>Un'ora di sopralluogo, gratuito, per sapere quanto costa il sistema ibrido e quanto ti torna indietro.</p>
+        <a class="button" href="#sopralluogo">Prenota il sopralluogo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Termica Lombarda Srl</strong>, impianti di riscaldamento a Milano e provincia.</p>
+      <p>Sito dimostrativo realizzato per un esercizio: l'azienda è immaginaria e il form non invia dati.</p>
+    </div>
+  </footer>
+</body>
+</html>
