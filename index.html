@@ -49,34 +49,49 @@
         </div>
 
         <!-- L'inverno scorso a Milano: fascia interattiva costruita da js/inverno.js con i dati di js/dati-inverno.js -->
-        <figure class="inverno" aria-labelledby="inverno-titolo">
+        <figure class="inverno modo-oggi" id="inverno" aria-labelledby="inverno-titolo">
           <div class="inverno__head">
             <h2 class="inverno__title" id="inverno-titolo">L'inverno scorso a Milano, giorno per giorno</h2>
-            <p class="inverno__summary">Per <strong id="giorni-pdc">165</strong> giorni su <span id="giorni-totali">183</span> sarebbe bastata la pompa di calore. La caldaia sarebbe servita solo nei <strong id="giorni-caldaia">18</strong> giorni più freddi, quelli in rosso.</p>
+            <div class="inverno__switch" role="group" aria-label="Scegli l'impianto da confrontare">
+              <button type="button" data-modo="oggi" aria-pressed="true">La tua caldaia di oggi</button>
+              <button type="button" data-modo="ibrido" aria-pressed="false">Con il sistema ibrido</button>
+            </div>
+            <div class="inverno__result">
+              <p class="inverno__count"><strong id="giorni-gas">183</strong> giorni su 183 con il gas acceso</p>
+              <p class="inverno__summary" id="inverno-riepilogo" aria-live="polite">Con una caldaia a gas tradizionale bruci gas tutti i 183 giorni della stagione di riscaldamento, anche quelli miti.</p>
+            </div>
           </div>
 
           <div class="inverno__stage" id="inverno-stage">
             <svg class="impianto" viewBox="0 0 640 240" aria-hidden="true">
               <!-- Tubi: mandata in alto (verso destra), ritorno in basso (verso sinistra) -->
               <g class="impianto__tubi" fill="none" stroke-width="8" stroke-linecap="round">
-                <path class="tubo tubo--mandata" d="M170 70 H250 M370 70 H462"/>
-                <path class="tubo tubo--ritorno" d="M462 150 H370 M250 150 H170"/>
-                <path class="flusso" d="M170 70 H250 M370 70 H462"/>
+                <path class="tubo tubo--mandata" d="M370 70 H462"/>
+                <path class="tubo tubo--ritorno" d="M462 150 H370"/>
+                <path class="flusso" d="M370 70 H462"/>
               </g>
 
-              <!-- Pompa di calore: la ventola gira quando lavora -->
-              <g class="impianto__pezzo">
-                <rect x="20" y="40" width="150" height="140" rx="6"/>
-                <circle cx="80" cy="110" r="40"/>
-                <rect x="132" y="60" width="24" height="100" rx="3" class="impianto__dettaglio"/>
-              </g>
-              <g class="ventola">
-                <path d="M80 110 C70 90 76 76 88 74 C92 88 88 100 80 110 Z"/>
-                <path d="M80 110 C102 108 112 120 108 131 C94 130 86 120 80 110 Z"/>
-                <path d="M80 110 C68 128 52 130 46 120 C54 108 68 106 80 110 Z"/>
+              <!-- Pompa di calore: c'è solo nel sistema ibrido; la ventola gira quando lavora -->
+              <g class="impianto__pdc">
+                <g class="impianto__tubi" fill="none" stroke-width="8" stroke-linecap="round">
+                  <path class="tubo tubo--mandata" d="M170 70 H250"/>
+                  <path class="tubo tubo--ritorno" d="M250 150 H170"/>
+                  <path class="flusso" d="M170 70 H250"/>
+                </g>
+                <g class="impianto__pezzo">
+                  <rect x="20" y="40" width="150" height="140" rx="6"/>
+                  <circle cx="80" cy="110" r="40"/>
+                  <rect x="132" y="60" width="24" height="100" rx="3" class="impianto__dettaglio"/>
+                </g>
+                <g class="ventola">
+                  <path d="M80 110 C70 90 76 76 88 74 C92 88 88 100 80 110 Z"/>
+                  <path d="M80 110 C102 108 112 120 108 131 C94 130 86 120 80 110 Z"/>
+                  <path d="M80 110 C68 128 52 130 46 120 C54 108 68 106 80 110 Z"/>
+                </g>
+                <text class="impianto__etichetta" x="95" y="228" text-anchor="middle">Pompa di calore</text>
               </g>
 
-              <!-- Caldaia a condensazione: la fiamma si accende solo nei giorni freddi -->
+              <!-- Caldaia: con l'ibrido la fiamma si accende solo nei giorni di gelo -->
               <g class="impianto__pezzo">
                 <rect x="250" y="20" width="120" height="180" rx="6"/>
                 <rect x="275" y="42" width="70" height="26" rx="3" class="impianto__dettaglio"/>
@@ -93,11 +108,8 @@
                 <rect x="582" y="50" width="22" height="120" rx="11"/>
               </g>
 
-              <g class="impianto__etichette">
-                <text x="95" y="228" text-anchor="middle">Pompa di calore</text>
-                <text x="310" y="228" text-anchor="middle">Caldaia</text>
-                <text x="537" y="228" text-anchor="middle">Termosifoni</text>
-              </g>
+              <text class="impianto__etichetta" x="310" y="228" text-anchor="middle">Caldaia</text>
+              <text class="impianto__etichetta" x="537" y="228" text-anchor="middle">Termosifoni</text>
             </svg>
 
             <div class="inverno__readout">
@@ -121,11 +133,11 @@
 
           <figcaption class="inverno__caption">
             <p class="inverno__legend">
-              <span class="legend legend--mandata">La caldaia aiuta: media del giorno sotto i 3 °C</span>
-              <span class="legend legend--ritorno">Basta la pompa di calore</span>
+              <span class="legend legend--mandata">Giorno con la caldaia a gas accesa</span>
+              <span class="legend legend--ritorno">Giorno scaldato dalla pompa di calore, senza gas</span>
             </p>
             <p>Trascina sulla fascia per scegliere un giorno. Più la barra è alta, più quel giorno serviva scaldare.</p>
-            <p class="inverno__source">La soglia di 3 °C è un esempio: nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
+            <p class="inverno__source">Con l'ibrido la caldaia entra quando la media del giorno scende sotto i 3 °C: è una soglia di esempio, nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
           </figcaption>
         </figure>
       </div>
@@ -269,6 +281,10 @@
           <details>
             <summary>Chi può chiedere il Conto Termico 3.0?</summary>
             <p>I privati che sostituiscono un impianto di riscaldamento esistente con uno più efficiente, come un sistema ibrido con i requisiti tecnici richiesti dal GSE. Al sopralluogo verifichiamo se il tuo caso rientra.</p>
+          </details>
+          <details>
+            <summary>Perché un sistema ibrido e non solo una pompa di calore?</summary>
+            <p>Una pompa di calore da sola rende al meglio con impianti a bassa temperatura, come i pannelli a pavimento o i termosifoni molto grandi. Con i termosifoni di una casa normale, nei giorni più freddi fa fatica. L'ibrido usa la pompa di calore per la maggior parte dell'inverno e lascia alla caldaia i giorni di gelo: non devi rifare l'impianto e il caldo in casa non manca.</p>
           </details>
           <details>
             <summary>Il sopralluogo mi impegna a qualcosa?</summary>
