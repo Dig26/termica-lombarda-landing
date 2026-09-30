@@ -49,15 +49,24 @@
 
   <main id="contenuto">
     <section class="hero" id="top">
-      <div class="container">
-        <div class="hero__text">
-          <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
-          <div class="hero__side">
-            <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa per il nuovo impianto ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
-            <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
+      <div class="hero__banner">
+        <img class="hero__img"
+             src="assets/img/milano-tramonto-1920.webp"
+             srcset="assets/img/milano-tramonto-960.webp 960w, assets/img/milano-tramonto-1920.webp 1920w"
+             sizes="100vw" width="1920" height="1278" fetchpriority="high"
+             alt="Tetti di un palazzo milanese con i comignoli, al tramonto">
+        <div class="container">
+          <div class="hero__text">
+            <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
+            <div class="hero__side">
+              <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa per il nuovo impianto ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
+              <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
+            </div>
           </div>
         </div>
+      </div>
 
+      <div class="container">
         <!-- L'inverno scorso a Milano: fascia interattiva costruita da js/inverno.js con i dati di js/dati-inverno.js -->
         <figure class="inverno modo-oggi" id="inverno" aria-labelledby="inverno-titolo">
           <div class="inverno__head">
@@ -209,6 +218,8 @@
             <time class="season__date" datetime="2026-10-15">15 ottobre</time>
             <span>A Milano si accendono i riscaldamenti. Il sopralluogo dura un'ora: meglio farlo prima.</span>
           </p>
+          <img class="foto foto--panoramica" src="assets/img/tecnico.webp" width="1000" height="1250" loading="lazy"
+               alt="Un tecnico al lavoro sui tubi sotto un lavello">
         </div>
 
         <div class="form-panel">
@@ -268,8 +279,11 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="perche-titolo">
-      <div class="container">
+    <section class="section section--sabbia" aria-labelledby="perche-titolo">
+      <div class="container split">
+        <img class="foto" src="assets/img/gatto-termosifone.webp" width="1000" height="1250" loading="lazy"
+             alt="Un gatto sdraiato su una sedia davanti al termosifone">
+        <div>
         <h2 id="perche-titolo">Perché conviene farlo adesso</h2>
         <ul class="reasons">
           <li>
@@ -285,19 +299,24 @@
             <p>A stagione iniziata le installazioni si allungano e restare senza riscaldamento anche un giorno pesa di più. Prima dell'accensione è il momento più semplice.</p>
           </li>
         </ul>
+        </div>
       </div>
     </section>
 
     <section class="section section--white" aria-labelledby="ibrido-titolo">
-      <div class="container container--narrow">
+      <div class="container split">
+        <div>
         <h2 id="ibrido-titolo">Come funziona un sistema ibrido</h2>
         <p>Una pompa di calore e una caldaia a condensazione lavorano insieme, comandate da un'unica centralina.</p>
         <p>La pompa di calore prende energia dall'aria esterna e fa la maggior parte del lavoro. Quando fuori fa molto freddo e renderebbe meno, la centralina accende la caldaia: sono i giorni in rosso nella fascia in alto.</p>
         <p>Nella maggior parte dei casi tieni i termosifoni che hai già. Lo verifichiamo al sopralluogo.</p>
+        </div>
+        <img class="foto foto--panoramica" src="assets/img/pompa-di-calore.webp" width="1200" height="801" loading="lazy"
+             alt="L'unità esterna di una pompa di calore in giardino, accanto a una casa in mattoni">
       </div>
     </section>
 
-    <section class="section" aria-labelledby="percorso-titolo">
+    <section class="section section--notte" aria-labelledby="percorso-titolo">
       <div class="container">
         <h2 id="percorso-titolo">Dal sopralluogo al rimborso</h2>
         <p class="section__intro">Ti seguiamo in ogni passaggio. L'unica cosa che fai tu è scegliere la data del sopralluogo.</p>
@@ -380,6 +399,7 @@
     <div class="container">
       <p><strong>Termica Lombarda Srl</strong>, impianti di riscaldamento a Milano e provincia.</p>
       <p>Sito dimostrativo realizzato per un esercizio: l'azienda è immaginaria e il form non invia dati.</p>
+      <p>Foto di Luciani Koroshec, Gaelle Marcel, alpha innotec e Timur Shakerzianov su <a href="https://unsplash.com/">Unsplash</a>.</p>
     </div>
   </footer>
 </body>

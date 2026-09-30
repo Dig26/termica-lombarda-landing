@@ -25,6 +25,10 @@
   --mandata: #C2361B;
   --mandata-scura: #A12B14;
   --linea: #C3CCD4;
+  /* Colori secondari, presi dalle foto: sfondi di alcune sezioni */
+  --sabbia: #F1E6D8;
+  --notte: #1E3550;
+  --notte-testo: #C9D6E3;
 
   /* Tipografia */
   --font: "Archivo", system-ui, sans-serif;
@@ -214,9 +218,39 @@ a {
   }
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero: foto di sfondo con velatura scura per leggere il testo bianco ---------- */
 .hero {
-  padding-block: clamp(2.5rem, 1rem + 5vw, 4.5rem) var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+.hero__banner {
+  position: relative;
+  isolation: isolate; /* i livelli con z-index negativo restano dentro il banner */
+  padding-block: clamp(3rem, 2rem + 5vw, 6rem) clamp(7rem, 5rem + 6vw, 10rem);
+  color: var(--carta);
+}
+
+.hero__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero__banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* più scura a sinistra, dove c'è il titolo; più leggera a destra per lasciar vedere il tramonto */
+  background: linear-gradient(90deg, rgba(17, 26, 34, 0.62) 0%, rgba(17, 26, 34, 0.38) 55%, rgba(17, 26, 34, 0.3) 100%);
+}
+
+.hero__text {
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
 }
 
 .hero__lead {
@@ -227,7 +261,8 @@ a {
 
 /* ---------- L'inverno scorso a Milano (fascia interattiva) ---------- */
 .inverno {
-  margin: clamp(2.5rem, 1.5rem + 3vw, 4rem) 0 0;
+  position: relative;
+  margin: calc(-1 * clamp(4.5rem, 3.5rem + 4vw, 7rem)) 0 0;
   padding: 1.25rem;
   background: var(--carta);
   border: 1px solid var(--linea);
@@ -768,6 +803,57 @@ a {
   background: var(--carta);
 }
 
+.section--sabbia {
+  background: var(--sabbia);
+}
+
+.section--notte {
+  background: var(--notte);
+  color: var(--carta);
+}
+
+.section--notte .section__intro,
+.section--notte .step p {
+  color: var(--notte-testo);
+}
+
+.section--notte .step__node {
+  background: var(--notte);
+}
+
+.section--notte .step--last .step__node {
+  background: var(--mandata);
+}
+
+/* Foto e testo affiancati (su mobile uno sopra l'altro) */
+.split {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.split .reasons {
+  grid-template-columns: 1fr;
+  margin-top: 1.5rem;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-panel);
+  object-fit: cover;
+}
+
+/* Taglio orizzontale anche per le foto verticali */
+.foto--panoramica {
+  aspect-ratio: 4 / 3;
+}
+
+.prenota__text .foto {
+  margin-top: 2rem;
+}
+
 .section__intro {
   margin-bottom: 2.5rem;
   color: var(--ardesia-soft);
@@ -976,6 +1062,11 @@ a {
   }
 
   .prenota {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .split {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
   }
