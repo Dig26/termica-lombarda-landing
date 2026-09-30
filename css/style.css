@@ -435,6 +435,128 @@ a {
   font-size: 0.8125rem;
 }
 
+/* ---------- Stima della bolletta ---------- */
+.bolletta {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 3px solid var(--ardesia);
+}
+
+.bolletta__title {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  font-stretch: var(--stretch-titoli);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.bolletta__intro {
+  color: var(--ardesia-soft);
+}
+
+.bolletta__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.bolletta__input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 36rem;
+  margin-bottom: 1.5rem;
+}
+
+.bolletta__input input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--ardesia);
+}
+
+.bolletta__input output {
+  min-width: 5.5ch;
+  font-weight: 800;
+  font-stretch: 75%;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.bolletta__rows {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.bolletta__name {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.bolletta__bar {
+  display: flex;
+  height: 1.25rem;
+  background: var(--nebbia);
+  border-radius: var(--radius-control);
+  overflow: hidden;
+}
+
+.bolletta__gas {
+  background: var(--mandata);
+  transition: width 0.3s ease;
+}
+
+.bolletta__luce {
+  background: var(--ritorno);
+  transition: width 0.3s ease;
+}
+
+.bolletta__value {
+  margin: 0.35rem 0 0;
+}
+
+.bolletta__value strong {
+  font-weight: 800;
+  font-stretch: 75%;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bolletta__value span {
+  color: var(--ardesia-soft);
+  font-size: var(--text-small);
+}
+
+.bolletta__saving {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.bolletta__saving strong {
+  color: var(--ritorno);
+}
+
+.bolletta__note {
+  color: var(--ardesia-soft);
+  font-size: var(--text-small);
+}
+
+.bolletta__ipotesi summary {
+  font-weight: 700;
+  font-size: var(--text-small);
+  cursor: pointer;
+}
+
+.bolletta__ipotesi ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--ardesia-soft);
+  font-size: var(--text-small);
+}
+
+.bolletta__ipotesi li + li {
+  margin-top: 0.4rem;
+}
+
 /* ---------- Schema dell'impianto (reagisce al giorno scelto) ---------- */
 .impianto {
   display: block;
@@ -846,6 +968,10 @@ a {
 
   .inverno__result {
     grid-template-columns: auto 1fr;
+  }
+
+  .bolletta__rows {
+    max-width: 44rem;
   }
 
   .prenota {

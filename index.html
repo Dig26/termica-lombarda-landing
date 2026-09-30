@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sistema ibrido con il Conto Termico 3.0 a Milano | Termica Lombarda</title>
-  <meta name="description" content="Sostituisci la vecchia caldaia con un sistema ibrido prima dell'inverno: fino al 65% rimborsato con il Conto Termico 3.0. La pratica la gestiamo noi. Prenota il sopralluogo gratuito.">
+  <meta name="description" content="Sostituisci la vecchia caldaia con un sistema ibrido prima dell'inverno: fino al 65% della spesa rimborsato con il Conto Termico 3.0. La pratica la gestiamo noi. Prenota il sopralluogo gratuito.">
   <!-- Azienda immaginaria: la pagina non deve finire nei risultati di ricerca -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#E9EDF0">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Cambia la caldaia prima che si accendano i termosifoni">
-  <meta property="og:description" content="Sistema ibrido con fino al 65% rimborsato dal Conto Termico 3.0. Sopralluogo gratuito a Milano e provincia.">
+  <meta property="og:description" content="Sistema ibrido con fino al 65% della spesa rimborsato dal Conto Termico 3.0. Sopralluogo gratuito a Milano e provincia.">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -43,7 +43,7 @@
         <div class="hero__text">
           <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
           <div class="hero__side">
-            <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
+            <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa per il nuovo impianto ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
             <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
           </div>
         </div>
@@ -131,12 +131,59 @@
           </div>
           <div class="inverno__months" id="inverno-mesi" aria-hidden="true"></div>
 
-          <figcaption class="inverno__caption">
+          <div class="inverno__caption">
             <p class="inverno__legend">
               <span class="legend legend--mandata">Giorno con la caldaia a gas accesa</span>
               <span class="legend legend--ritorno">Giorno scaldato dalla pompa di calore, senza gas</span>
             </p>
             <p>Trascina sulla fascia per scegliere un giorno. Più la barra è alta, più quel giorno serviva scaldare.</p>
+          </div>
+
+          <!-- Stima della bolletta: calcolata da js/inverno.js con le stesse temperature della fascia -->
+          <div class="bolletta" id="bolletta">
+            <h3 class="bolletta__title">E in bolletta?</h3>
+            <p class="bolletta__intro">La pompa di calore va a corrente, quindi il conto giusto somma gas e luce.</p>
+
+            <label class="bolletta__label" for="spesa-gas">Quanto spendi di gas in un anno per il riscaldamento?</label>
+            <div class="bolletta__input">
+              <input id="spesa-gas" type="range" min="400" max="3000" step="50" value="1350">
+              <output id="spesa-gas-valore" for="spesa-gas">1.350 €</output>
+            </div>
+
+            <div class="bolletta__rows">
+              <div class="bolletta__row">
+                <p class="bolletta__name">Con la tua caldaia di oggi</p>
+                <div class="bolletta__bar" aria-hidden="true">
+                  <span class="bolletta__gas" id="barra-oggi-gas"></span>
+                </div>
+                <p class="bolletta__value"><strong id="costo-oggi">1.350 €</strong> <span>solo gas</span></p>
+              </div>
+              <div class="bolletta__row">
+                <p class="bolletta__name">Con il sistema ibrido</p>
+                <div class="bolletta__bar" aria-hidden="true">
+                  <span class="bolletta__gas" id="barra-ibrido-gas"></span><span class="bolletta__luce" id="barra-ibrido-luce"></span>
+                </div>
+                <p class="bolletta__value"><strong id="costo-ibrido">circa 810 €</strong> <span id="dettaglio-ibrido">190 € di gas + 620 € di luce</span></p>
+              </div>
+            </div>
+
+            <p class="bolletta__saving" id="bolletta-risparmio">Circa <strong>540 € in meno</strong> ogni inverno, il 40% della spesa per il riscaldamento.</p>
+            <p class="bolletta__note">È una stima indicativa, in più rispetto al rimborso del Conto Termico sull'impianto. Il conto preciso sulla tua casa lo facciamo al sopralluogo.</p>
+
+            <details class="bolletta__ipotesi">
+              <summary>Come facciamo il conto</summary>
+              <ul>
+                <li>Prezzi con tasse incluse: gas 1,35 € al metro cubo, luce 0,30 € al kWh (medie di mercato di settembre 2026).</li>
+                <li>Caldaia di oggi: rendimento dell'80%, tipico di una caldaia a gas non a condensazione con qualche anno di servizio.</li>
+                <li>Pompa di calore: per ogni kWh di corrente produce da 2 a 4,5 kWh di calore, di più nei giorni miti. Sono valori prudenti per chi tiene i termosifoni tradizionali.</li>
+                <li>Caldaia a condensazione dell'ibrido: rendimento del 92%, accesa solo nei giorni con media sotto i 3 °C.</li>
+                <li>Il calore che serve ogni giorno cresce con la distanza tra la temperatura media e 20 °C, usando le temperature reali di Milano dell'inverno scorso.</li>
+                <li>Conta solo il riscaldamento: acqua calda e cucina sono escluse.</li>
+              </ul>
+            </details>
+          </div>
+
+          <figcaption class="inverno__caption">
             <p class="inverno__source">Con l'ibrido la caldaia entra quando la media del giorno scende sotto i 3 °C: è una soglia di esempio, nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
           </figcaption>
         </figure>
@@ -221,7 +268,7 @@
           </li>
           <li>
             <h3>Il rimborso arriva sul conto corrente</h3>
-            <p>Il Conto Termico 3.0 non è una detrazione da spalmare in dieci anni di dichiarazioni dei redditi. È un bonifico del GSE, fino al 65% di quanto hai speso.</p>
+            <p>Il Conto Termico 3.0 non è una detrazione da spalmare in dieci anni di dichiarazioni dei redditi. È un bonifico del GSE, fino al 65% di quanto hai speso per l'impianto.</p>
           </li>
           <li>
             <h3>In inverno i tecnici sono tutti impegnati</h3>
@@ -268,7 +315,7 @@
           <li class="step step--last">
             <span class="step__node" aria-hidden="true">5</span>
             <h3>Rimborso sul conto corrente</h3>
-            <p>Il GSE ti accredita l'incentivo con un bonifico: fino al 65% della spesa.</p>
+            <p>Il GSE ti accredita l'incentivo con un bonifico: fino al 65% della spesa per l'impianto.</p>
           </li>
         </ol>
       </div>

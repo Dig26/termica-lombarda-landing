@@ -179,6 +179,62 @@ document.addEventListener("DOMContentLoaded", () => {
     if (strip.hasPointerCapture(event.pointerId)) mostraGiorno(giornoDaPuntatore(event));
   });
 
+  // ---------- Stima della bolletta (le ipotesi sono scritte anche nella pagina) ----------
+  const PREZZO_GAS = 1.35;         // € al metro cubo (Smc), tasse incluse
+  const PREZZO_LUCE = 0.30;        // € al kWh, tasse incluse
+  const KWH_PER_SMC = 10.69;       // energia contenuta in un metro cubo di gas
+  const RENDIMENTO_VECCHIA = 0.80; // caldaia di oggi, non a condensazione
+  const RENDIMENTO_NUOVA = 0.92;   // caldaia a condensazione dell'ibrido con termosifoni tradizionali
+
+  // Quanti kWh di calore produce la pompa di calore per ogni kWh di corrente (COP):
+  // cresce con la temperatura esterna, tra 2 e 4,5
+  const cop = (t) => Math.min(Math.max(2.8 + 0.12 * (t - 2), 2), 4.5);
+
+  // Quota del calore stagionale che serve ogni giorno: proporzionale a quanto la media è sotto i 20 °C
+  const fabbisogno = dati.media.map((t) => Math.max(COMFORT - t, 0));
+  const fabbisognoTotale = fabbisogno.reduce((a, b) => a + b, 0);
+
+  // useGrouping "always": in italiano il punto delle migliaia altrimenti compare solo da 10.000 in su
+  const euro = new Intl.NumberFormat("it-IT", {
+    style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always",
+  });
+  const arrotonda = (x) => Math.round(x / 10) * 10; // niente falsa precisione
+
+  function stimaBolletta(spesaGasOggi) {
+    const calore = (spesaGasOggi / PREZZO_GAS) * KWH_PER_SMC * RENDIMENTO_VECCHIA;
+    let smcIbrido = 0;
+    let kwhLuce = 0;
+    dati.media.forEach((t, i) => {
+      const caloreDelGiorno = calore * (fabbisogno[i] / fabbisognoTotale);
+      if (giornoDiGelo(i)) smcIbrido += caloreDelGiorno / RENDIMENTO_NUOVA / KWH_PER_SMC;
+      else kwhLuce += caloreDelGiorno / cop(t);
+    });
+    return { gas: smcIbrido * PREZZO_GAS, luce: kwhLuce * PREZZO_LUCE };
+  }
+
+  const spesaGas = document.getElementById("spesa-gas");
+
+  function aggiornaBolletta() {
+    const oggi = Number(spesaGas.value);
+    const ibrido = stimaBolletta(oggi);
+    const totaleIbrido = ibrido.gas + ibrido.luce;
+    const risparmio = oggi - totaleIbrido;
+
+    document.getElementById("spesa-gas-valore").textContent = euro.format(oggi);
+    document.getElementById("costo-oggi").textContent = euro.format(oggi);
+    document.getElementById("costo-ibrido").textContent = `circa ${euro.format(arrotonda(totaleIbrido))}`;
+    document.getElementById("dettaglio-ibrido").textContent =
+      `${euro.format(arrotonda(ibrido.gas))} di gas + ${euro.format(arrotonda(ibrido.luce))} di luce`;
+    document.getElementById("barra-oggi-gas").style.width = "100%";
+    document.getElementById("barra-ibrido-gas").style.width = `${(ibrido.gas / oggi) * 100}%`;
+    document.getElementById("barra-ibrido-luce").style.width = `${(ibrido.luce / oggi) * 100}%`;
+    document.getElementById("bolletta-risparmio").innerHTML =
+      `Circa <strong>${euro.format(arrotonda(risparmio))} in meno</strong> ogni inverno, il ${Math.round((risparmio / oggi) * 100)}% della spesa per il riscaldamento.`;
+  }
+
+  spesaGas.addEventListener("input", aggiornaBolletta);
+  aggiornaBolletta();
+
   // ---------- Stato iniziale ----------
   // Si parte dalla caldaia di oggi su un giorno mite (media più vicina a 10 °C):
   // il gas è acceso anche se non ce ne sarebbe bisogno.
