@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="2.5" fill="#C2361B"/><rect x="3" y="15" width="18" height="5" rx="2.5" fill="#2F5D8C"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Raccordo a T. Il colore scuro diventa chiaro quando la scheda del browser è in tema scuro -->
+  <style>.tubo { stroke: #1D2B36; } .pezzo { fill: #1D2B36; } @media (prefers-color-scheme: dark) { .tubo { stroke: #E9EDF0; } .pezzo { fill: #E9EDF0; } }</style>
+  <defs>
+    <mask id="foro"><rect width="48" height="48" fill="#fff"/><circle cx="24" cy="15" r="3" fill="#000"/></mask>
+  </defs>
+  <path d="M5 15 H24" stroke="#C2361B" stroke-width="9" fill="none"/>
+  <path d="M24 15 H43" stroke="#2F5D8C" stroke-width="9" fill="none"/>
+  <path class="tubo" d="M24 18 V41" stroke-width="9" fill="none"/>
+  <rect x="2" y="8.5" width="6" height="13" rx="1.5" fill="#C2361B"/>
+  <rect x="40" y="8.5" width="6" height="13" rx="1.5" fill="#2F5D8C"/>
+  <rect class="pezzo" x="17.5" y="39" width="13" height="6" rx="1.5"/>
+  <rect class="pezzo" x="16" y="7" width="16" height="16" rx="4" mask="url(#foro)"/>
+</svg>

@@ -27,9 +27,18 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="logo" href="#top" aria-label="Termica Lombarda, torna all'inizio">
-        <svg class="logo__mark" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="5" rx="2.5" fill="#C2361B"/>
-          <rect x="3" y="15" width="18" height="5" rx="2.5" fill="#2F5D8C"/>
+        <!-- Raccordo a T: caldaia (rosso) e pompa di calore (blu) si uniscono in un tubo verso casa -->
+        <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <mask id="logo-foro"><rect width="48" height="48" fill="#fff"/><circle cx="24" cy="15" r="3" fill="#000"/></mask>
+          </defs>
+          <path d="M5 15 H24" stroke="#C2361B" stroke-width="9" fill="none"/>
+          <path d="M24 15 H43" stroke="#2F5D8C" stroke-width="9" fill="none"/>
+          <path d="M24 18 V41" stroke="currentColor" stroke-width="9" fill="none"/>
+          <rect x="2" y="8.5" width="6" height="13" rx="1.5" fill="#C2361B"/>
+          <rect x="40" y="8.5" width="6" height="13" rx="1.5" fill="#2F5D8C"/>
+          <rect x="17.5" y="39" width="13" height="6" rx="1.5" fill="currentColor"/>
+          <rect x="16" y="7" width="16" height="16" rx="4" fill="currentColor" mask="url(#logo-foro)"/>
         </svg>
         Termica Lombarda
       </a>
