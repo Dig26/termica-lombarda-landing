@@ -12,13 +12,13 @@ Obiettivo unico della pagina: far richiedere un **sopralluogo gratuito**.
 - `noindex`: l'azienda è immaginaria.
 
 ## Struttura
-- `index.html`: hero con foto + fascia interattiva "L'inverno scorso a Milano", prenotazione (form), perché adesso, come funziona, percorso in 5 passi, FAQ, richiamo finale.
+- `index.html`: hero con foto + fascia interattiva "L'inverno scorso a Milano", prenotazione (form + i nostri impegni), perché adesso, come funziona, percorso in 5 passi, FAQ, richiamo finale. Ogni blocco lungo finisce con un richiamo al sopralluogo. L'informativa privacy (dimostrativa) è nel footer.
 - `css/style.css`: unico foglio di stile, design token in `:root`.
 - `js/form.js`: validazione e conferma del form.
 - `js/inverno.js`: fascia interattiva (183 giorni, confronto caldaia di oggi / sistema ibrido) e stima della bolletta.
 - `js/dati-inverno.js`: temperature giornaliere di Milano 15/10/2025–15/04/2026, **generato** da `scripts/scarica-dati.py` (Open-Meteo, CC BY 4.0). Non modificarlo a mano.
 - `scripts/prepara-foto.swift`: ritaglio, sfocatura di marchi e ridimensionamento delle foto (poi `cwebp` per il WebP).
-- `assets/img/`: foto Unsplash in WebP, crediti nel footer. `assets/favicon.svg`: logo a raccordo a T con variante per tema scuro.
+- `assets/img/`: foto Unsplash in WebP, crediti nel footer. `anteprima.jpg` (1200×630, ritaglio della foto dell'hero) è l'immagine Open Graph: JPEG perché alcune app di messaggi non leggono il WebP nelle anteprime. `assets/favicon.svg`: logo a raccordo a T con variante per tema scuro.
 
 ## Scelte di contenuto da non stravolgere senza discuterne
 - 65% = rimborso sulla **spesa per l'impianto**; circa 40% = risparmio stimato **in bolletta**. Ogni numero va sempre legato al suo sostantivo.
@@ -34,7 +34,7 @@ Obiettivo unico della pagina: far richiedere un **sopralluogo gratuito**.
 
 ## Qualità minima
 - Responsive da 320px in su, nessuno scorrimento orizzontale.
-- Accessibilità: contrasto WCAG AA, focus visibile, label su ogni campo, errori annunciati, `prefers-reduced-motion` rispettato.
+- Accessibilità: contrasto WCAG AA, focus visibile, label su ogni campo, errori annunciati, `prefers-reduced-motion` rispettato. La velatura dell'hero è tarata per tenere il testo bianco sopra 4,5:1 sulla foto: se cambia la foto va rimisurata.
 - Meta SEO e Open Graph in `<head>`.
 
 ## Processo
