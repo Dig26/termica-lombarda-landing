@@ -161,7 +161,11 @@ document.addEventListener("DOMContentLoaded", () => {
       `${data}, media ${gradi(dati.media[i])}, ${accesa ? "caldaia a gas accesa" : "lavora la pompa di calore, niente gas"}`);
   }
 
-  range.addEventListener("input", () => mostraGiorno(Number(range.value)));
+  // Da tastiera: chi sta già scegliendo un giorno non deve vedersi cambiare impianto da solo
+  range.addEventListener("input", () => {
+    annullaCambioAutomatico();
+    mostraGiorno(Number(range.value));
+  });
 
   // Trascinamento con mouse o dito: la posizione orizzontale diventa un giorno
   function giornoDaPuntatore(event) {
@@ -175,8 +179,13 @@ document.addEventListener("DOMContentLoaded", () => {
     mostraGiorno(giornoDaPuntatore(event));
   });
 
+  // Solo un trascinamento vero annulla il cambio automatico: se il dito sta scorrendo
+  // la pagina in verticale, il browser rilascia il puntatore e qui non arriva nulla
   strip.addEventListener("pointermove", (event) => {
-    if (strip.hasPointerCapture(event.pointerId)) mostraGiorno(giornoDaPuntatore(event));
+    if (strip.hasPointerCapture(event.pointerId)) {
+      annullaCambioAutomatico();
+      mostraGiorno(giornoDaPuntatore(event));
+    }
   });
 
   // ---------- Stima della bolletta (le ipotesi sono scritte anche nella pagina) ----------
@@ -230,6 +239,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("barra-ibrido-luce").style.width = `${(ibrido.luce / oggi) * 100}%`;
     document.getElementById("bolletta-risparmio").innerHTML =
       `Circa <strong>${euro.format(arrotonda(risparmio))} in meno</strong> ogni inverno, il ${Math.round((risparmio / oggi) * 100)}% della spesa per il riscaldamento.`;
+
+    // Gli screen reader leggono questo testo quando si sposta lo slider: valore e risultato insieme
+    spesaGas.setAttribute("aria-valuetext",
+      `${euro.format(oggi)} di gas all'anno: con l'ibrido circa ${euro.format(arrotonda(totaleIbrido))}, ${euro.format(arrotonda(risparmio))} in meno`);
   }
 
   spesaGas.addEventListener("input", aggiornaBolletta);

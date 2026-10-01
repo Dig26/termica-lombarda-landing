@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sistema ibrido con il Conto Termico 3.0 a Milano | Termica Lombarda</title>
-  <meta name="description" content="Sostituisci la vecchia caldaia con un sistema ibrido prima dell'inverno: fino al 65% della spesa rimborsato con il Conto Termico 3.0. La pratica la gestiamo noi. Prenota il sopralluogo gratuito.">
+  <meta name="description" content="Sostituisci la vecchia caldaia con un sistema ibrido prima dell'inverno: fino al 65% della spesa per l'impianto rimborsato con il Conto Termico 3.0. La pratica la gestiamo noi. Prenota il sopralluogo gratuito.">
   <!-- Azienda immaginaria: la pagina non deve finire nei risultati di ricerca -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#E9EDF0">
@@ -12,7 +12,14 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Cambia la caldaia prima che si accendano i termosifoni">
-  <meta property="og:description" content="Sistema ibrido con fino al 65% della spesa rimborsato dal Conto Termico 3.0. Sopralluogo gratuito a Milano e provincia.">
+  <meta property="og:description" content="Sistema ibrido con fino al 65% della spesa per l'impianto rimborsato dal Conto Termico 3.0. Sopralluogo gratuito a Milano e provincia.">
+  <meta property="og:url" content="https://dig26.github.io/termica-lombarda-landing/">
+  <!-- Anteprima quando il link viene condiviso: indirizzo assoluto e JPEG, che tutte le app di messaggi sanno leggere -->
+  <meta property="og:image" content="https://dig26.github.io/termica-lombarda-landing/assets/img/anteprima.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tetti di un palazzo milanese con i comignoli, al tramonto">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- ?v=2: cambia l'indirizzo e costringe i browser a scaricare la favicon nuova invece di quella in cache -->
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
@@ -59,8 +66,13 @@
           <div class="hero__text">
             <h1>Cambia la caldaia prima che si accendano i termosifoni</h1>
             <div class="hero__side">
-              <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: fino al 65% della spesa per il nuovo impianto ti torna sul conto corrente con il Conto Termico 3.0. La pratica la gestiamo noi.</p>
+              <p class="hero__lead">Sostituisci la vecchia caldaia con un sistema ibrido: <strong>fino al 65% della spesa per l'impianto</strong> ti torna sul conto corrente con il Conto Termico 3.0.</p>
               <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
+              <ul class="checks">
+                <li>Sopralluogo gratuito e senza impegno</li>
+                <li>Pratica al GSE a carico nostro</li>
+                <li>Milano e provincia</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -68,9 +80,10 @@
 
       <div class="container">
         <!-- L'inverno scorso a Milano: fascia interattiva costruita da js/inverno.js con i dati di js/dati-inverno.js -->
-        <figure class="inverno modo-oggi" id="inverno" aria-labelledby="inverno-titolo">
+        <section class="inverno modo-oggi" id="inverno" aria-labelledby="inverno-titolo">
           <div class="inverno__head">
             <h2 class="inverno__title" id="inverno-titolo">L'inverno scorso a Milano, giorno per giorno</h2>
+            <p class="inverno__hint">Confronta la caldaia di oggi con il sistema ibrido: quanti giorni resta acceso il gas? Trascina sulla fascia per vedere un giorno qualsiasi.</p>
             <div class="inverno__switch" role="group" aria-label="Scegli l'impianto da confrontare">
               <button type="button" data-modo="oggi" aria-pressed="true">La tua caldaia di oggi</button>
               <button type="button" data-modo="ibrido" aria-pressed="false">Con il sistema ibrido</button>
@@ -155,7 +168,8 @@
               <span class="legend legend--mandata">Giorno con la caldaia a gas accesa</span>
               <span class="legend legend--ritorno">Giorno scaldato dalla pompa di calore, senza gas</span>
             </p>
-            <p>Trascina sulla fascia per scegliere un giorno. Più la barra è alta, più quel giorno serviva scaldare.</p>
+            <p>Più la barra è alta, più quel giorno serviva scaldare.</p>
+            <p class="inverno__source">Con l'ibrido la caldaia entra quando la media del giorno scende sotto i 3 °C: è una soglia di esempio, nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
           </div>
 
           <!-- Stima della bolletta: calcolata da js/inverno.js con le stesse temperature della fascia -->
@@ -187,7 +201,11 @@
             </div>
 
             <p class="bolletta__saving" id="bolletta-risparmio">Circa <strong>540 € in meno</strong> ogni inverno, il 40% della spesa per il riscaldamento.</p>
-            <p class="bolletta__note">È una stima indicativa, in più rispetto al rimborso del Conto Termico sull'impianto. Il conto preciso sulla tua casa lo facciamo al sopralluogo.</p>
+            <p class="bolletta__note">È una stima indicativa, in più rispetto al rimborso del Conto Termico sull'impianto.</p>
+            <div class="azione">
+              <p>Il conto preciso sulla tua casa lo facciamo al sopralluogo, gratis.</p>
+              <a class="button" href="#sopralluogo">Prenota il sopralluogo gratuito</a>
+            </div>
 
             <details class="bolletta__ipotesi">
               <summary>Come facciamo il conto</summary>
@@ -201,25 +219,16 @@
               </ul>
             </details>
           </div>
-
-          <figcaption class="inverno__caption">
-            <p class="inverno__source">Con l'ibrido la caldaia entra quando la media del giorno scende sotto i 3 °C: è una soglia di esempio, nel tuo impianto la imposta il tecnico. Temperature medie giornaliere di Milano dal 15 ottobre 2025 al 15 aprile 2026, fonte <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</p>
-          </figcaption>
-        </figure>
+        </section>
       </div>
     </section>
 
-    <section class="section section--white" id="sopralluogo" aria-labelledby="prenota-titolo">
+    <section class="section section--cielo" id="sopralluogo" aria-labelledby="prenota-titolo">
+      <!-- Su mobile l'ordine è: titolo, form, impegni. Su desktop il form sta nella colonna di destra -->
       <div class="container prenota">
-        <div class="prenota__text">
+        <div class="prenota__intro">
           <h2 id="prenota-titolo">Prenota il sopralluogo gratuito</h2>
           <p>Un tecnico controlla il tuo impianto e ti dice quanto puoi recuperare con il Conto Termico 3.0. Nessun costo, nessun impegno.</p>
-          <p class="season">
-            <time class="season__date" datetime="2026-10-15">15 ottobre</time>
-            <span>A Milano si accendono i riscaldamenti. Il sopralluogo dura un'ora: meglio farlo prima.</span>
-          </p>
-          <img class="foto foto--panoramica" src="assets/img/tecnico.webp" width="1000" height="1250" loading="lazy"
-               alt="Un tecnico al lavoro sui tubi sotto un lavello">
         </div>
 
         <div class="form-panel">
@@ -236,7 +245,7 @@
             <div class="field">
               <label for="telefono">Telefono</label>
               <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required
-                     pattern="\+?[0-9 ]{8,16}"
+                     pattern="\+?([0-9] ?){8,15}"
                      aria-describedby="telefono-errore"
                      data-msg-missing="Scrivi un numero di telefono: ti chiamiamo per fissare l'appuntamento."
                      data-msg-invalid="Usa solo numeri, almeno 8 cifre. Esempio: 333 123 4567.">
@@ -263,18 +272,34 @@
               <input id="privacy" name="privacy" type="checkbox" required
                      aria-describedby="privacy-errore"
                      data-msg-missing="Serve il consenso per poterti ricontattare.">
-              <label for="privacy">Acconsento a essere ricontattato per il sopralluogo, secondo l'informativa privacy.</label>
+              <label for="privacy">Acconsento a essere ricontattato per il sopralluogo, secondo l'<a href="#informativa">informativa privacy</a>.</label>
               <p class="field__error" id="privacy-errore" aria-live="polite"></p>
             </div>
 
             <button class="button button--full" type="submit">Prenota il sopralluogo</button>
+            <p class="form__note">Ti chiamiamo entro un giorno lavorativo per fissare data e ora. Gratis e senza impegno.</p>
           </form>
 
           <div class="form-success" id="form-success" tabindex="-1" hidden>
-            <h3>Sopralluogo prenotato</h3>
-            <p>Ti chiamiamo entro un giorno lavorativo per fissare data e ora.</p>
+            <h3>Richiesta ricevuta</h3>
+            <p>Ti chiamiamo entro un giorno lavorativo per fissare data e ora del sopralluogo.</p>
+            <p>Se ti è comodo, tieni a portata di mano l'ultima bolletta del gas e, se li trovi, marca e modello della caldaia.</p>
             <p class="form-success__note">Questo è un sito dimostrativo: nessun dato è stato inviato.</p>
           </div>
+        </div>
+
+        <div class="prenota__extra">
+          <h3>I nostri impegni</h3>
+          <ul class="impegni">
+            <li>Un preventivo scritto, con il costo dell'impianto e la cifra che puoi recuperare dal Conto Termico 3.0.</li>
+            <li>Se la tua casa non rientra nei requisiti, te lo diciamo al sopralluogo, prima di qualsiasi spesa.</li>
+            <li>La pratica al GSE la prepariamo e la inviamo noi.</li>
+            <li>Un solo referente, dal sopralluogo al bonifico del rimborso.</li>
+          </ul>
+          <p class="season">
+            <time class="season__date" datetime="2026-10-15">15 ottobre</time>
+            <span>A Milano si accendono i riscaldamenti. Il sopralluogo dura un'ora: meglio farlo prima.</span>
+          </p>
         </div>
       </div>
     </section>
@@ -347,6 +372,7 @@
             <p>Il GSE ti accredita l'incentivo con un bonifico: fino al 65% della spesa per l'impianto.</p>
           </li>
         </ol>
+        <a class="button" href="#sopralluogo">Parti dal sopralluogo gratuito</a>
       </div>
     </section>
 
@@ -355,8 +381,20 @@
         <h2 id="faq-titolo">Domande frequenti</h2>
         <div class="faq">
           <details>
+            <summary>Quanto costa?</summary>
+            <p>Dipende dalla casa: quanto è grande, quanto calore serve, dove va l'unità esterna. Per questo non diamo prezzi a occhio: dopo il sopralluogo ricevi un preventivo scritto con il costo dell'impianto e la cifra che puoi recuperare dal Conto Termico 3.0. Sopralluogo e preventivo sono gratuiti.</p>
+          </details>
+          <details>
             <summary>Chi può chiedere il Conto Termico 3.0?</summary>
             <p>I privati che sostituiscono un impianto di riscaldamento esistente con uno più efficiente, come un sistema ibrido con i requisiti tecnici richiesti dal GSE. Al sopralluogo verifichiamo se il tuo caso rientra.</p>
+          </details>
+          <details>
+            <summary>Ho il riscaldamento centralizzato: fa per me?</summary>
+            <p>Questa offerta è pensata per chi ha una caldaia propria, che scalda solo la sua casa. Con il riscaldamento centralizzato la scelta dell'impianto spetta al condominio, non al singolo appartamento.</p>
+          </details>
+          <details>
+            <summary>Abito in condominio: dove va l'unità esterna?</summary>
+            <p>Di solito su un balcone, un terrazzo o in cortile, dove l'aria circola. Al sopralluogo controlliamo lo spazio, la distanza dalla caldaia e il rumore verso i vicini, e ti diciamo cosa verificare nel regolamento di condominio.</p>
           </details>
           <details>
             <summary>Perché un sistema ibrido e non solo una pompa di calore?</summary>
@@ -371,6 +409,10 @@
             <p>Nella maggior parte dei casi sì: il sistema ibrido funziona anche con i termosifoni tradizionali. Lo controlliamo durante il sopralluogo.</p>
           </details>
           <details>
+            <summary>Quanto dura l'installazione?</summary>
+            <p>In genere un paio di giorni di lavoro: la durata precisa è scritta nel preventivo. Mentre installiamo il riscaldamento resta spento, per questo conviene farlo prima dell'accensione.</p>
+          </details>
+          <details>
             <summary>Quando arriva il rimborso?</summary>
             <p>Dipende dall'importo e dai tempi del GSE. Per gli interventi su una casa di solito arriva in un'unica rata, qualche mese dopo l'accettazione della domanda.</p>
           </details>
@@ -383,6 +425,7 @@
             <p>Documento d'identità, codice fiscale, IBAN e i dati catastali della casa. Il resto lo prepariamo noi.</p>
           </details>
         </div>
+        <p class="faq__more">Un dubbio che non trovi qui? <a href="#sopralluogo">Lasciaci il numero</a>: ne parliamo al telefono, prima del sopralluogo.</p>
       </div>
     </section>
 
@@ -399,7 +442,8 @@
     <div class="container">
       <p><strong>Termica Lombarda Srl</strong>, impianti di riscaldamento a Milano e provincia.</p>
       <p>Sito dimostrativo realizzato per un esercizio: l'azienda è immaginaria e il form non invia dati.</p>
-      <p>Foto di Luciani Koroshec, Gaelle Marcel, alpha innotec e Timur Shakerzianov su <a href="https://unsplash.com/">Unsplash</a>.</p>
+      <p id="informativa"><strong>Informativa privacy.</strong> Su questo sito dimostrativo il form non invia e non salva nessun dato. In un sito reale qui ci sarebbero chi tratta i dati, per cosa (ricontattarti per il sopralluogo), per quanto tempo li conserva e come chiederne la cancellazione.</p>
+      <p>Foto di Luciani Koroshec, Gaelle Marcel e alpha innotec su <a href="https://unsplash.com/">Unsplash</a>.</p>
     </div>
   </footer>
 </body>

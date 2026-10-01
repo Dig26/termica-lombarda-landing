@@ -27,6 +27,7 @@
   --linea: #C3CCD4;
   /* Colori secondari, presi dalle foto: sfondi di alcune sezioni */
   --sabbia: #F1E6D8;
+  --cielo: #DDE7F0;
   --notte: #1E3550;
   --notte-testo: #C9D6E3;
 
@@ -202,7 +203,9 @@ a {
   font-weight: 800;
   font-stretch: 75%;
   font-size: 1.375rem;
+  line-height: 1.1;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .logo__mark {
@@ -215,6 +218,18 @@ a {
 @media (max-width: 30rem) {
   .hide-small {
     display: none;
+  }
+}
+
+/* A 320px logo e pulsante non stanno su una riga: il logo si rimpicciolisce */
+@media (max-width: 22.5rem) {
+  .logo {
+    font-size: 1.125rem;
+  }
+
+  .logo__mark {
+    width: 1.875rem;
+    height: 1.875rem;
   }
 }
 
@@ -245,8 +260,9 @@ a {
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* più scura a sinistra, dove c'è il titolo; più leggera a destra per lasciar vedere il tramonto */
-  background: linear-gradient(90deg, rgba(17, 26, 34, 0.62) 0%, rgba(17, 26, 34, 0.38) 55%, rgba(17, 26, 34, 0.3) 100%);
+  /* Abbastanza scura ovunque ci sia testo: sotto ci sono facciate chiare. Valori misurati pixel per pixel
+     sulla foto: con questa velatura il testo bianco resta sopra 4,5:1 (WCAG AA) da 320px a 1440px */
+  background: linear-gradient(90deg, rgba(17, 26, 34, 0.62) 0%, rgba(17, 26, 34, 0.6) 55%, rgba(17, 26, 34, 0.62) 100%);
 }
 
 .hero__text {
@@ -257,6 +273,43 @@ a {
   margin-top: 1.5rem;
   font-size: 1.25rem;
   line-height: 1.5;
+}
+
+/* Il numero dell'offerta, sottolineato con il rosso della mandata */
+.hero__lead strong {
+  text-decoration: underline 3px var(--mandata);
+  text-underline-offset: 0.2em;
+}
+
+/* Rassicurazioni sotto la CTA dell'hero */
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-small);
+  font-weight: 600;
+}
+
+/* Spunta disegnata con due bordi ruotati: niente icone da caricare */
+.checks li,
+.impegni li {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.checks li::before,
+.impegni li::before {
+  content: "";
+  flex: none;
+  width: 0.4em;
+  height: 0.75em;
+  margin: 0.2em 0.15em 0;
+  border: solid currentColor;
+  border-width: 0 0.16em 0.16em 0;
+  transform: rotate(45deg);
 }
 
 /* ---------- L'inverno scorso a Milano (fascia interattiva) ---------- */
@@ -275,16 +328,22 @@ a {
 }
 
 /* Interruttore: caldaia di oggi / sistema ibrido */
+.inverno__hint {
+  margin-bottom: 0;
+  color: var(--ardesia-soft);
+}
+
+/* Su mobile i due pulsanti dividono la riga a metà; da tablet in su l'interruttore si stringe al testo */
 .inverno__switch {
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin-block: 0.75rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-block: 1rem 1.25rem;
   border: 2px solid var(--ardesia);
   border-radius: var(--radius-control);
 }
 
 .inverno__switch button {
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 0.75rem;
   border: 0;
   background: transparent;
   color: var(--ardesia);
@@ -576,6 +635,23 @@ a {
   font-size: var(--text-small);
 }
 
+/* Richiamo al sopralluogo alla fine di un blocco */
+.azione {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-block: 1.5rem;
+  padding: 1.25rem;
+  background: var(--nebbia);
+  border-radius: var(--radius-panel);
+}
+
+.azione p {
+  margin: 0;
+  font-weight: 700;
+}
+
 .bolletta__ipotesi summary {
   font-weight: 700;
   font-size: var(--text-small);
@@ -681,6 +757,26 @@ a {
   gap: 2.5rem;
 }
 
+.prenota__intro p:last-child {
+  margin-bottom: 0;
+}
+
+.prenota__extra h3 {
+  margin-bottom: 1rem;
+}
+
+.impegni {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.impegni li::before {
+  color: var(--ritorno);
+}
+
 .season {
   display: flex;
   align-items: baseline;
@@ -776,6 +872,13 @@ a {
   grid-column: 2;
 }
 
+.form__note {
+  margin: 0.75rem auto 0;
+  color: var(--ardesia-soft);
+  font-size: var(--text-small);
+  text-align: center;
+}
+
 /* Riceve il focus via JS per gli screen reader: non serve il contorno */
 .form-success:focus {
   outline: none;
@@ -805,6 +908,10 @@ a {
 
 .section--sabbia {
   background: var(--sabbia);
+}
+
+.section--cielo {
+  background: var(--cielo);
 }
 
 .section--notte {
@@ -848,10 +955,6 @@ a {
 /* Taglio orizzontale anche per le foto verticali */
 .foto--panoramica {
   aspect-ratio: 4 / 3;
-}
-
-.prenota__text .foto {
-  margin-top: 2rem;
 }
 
 .section__intro {
@@ -957,6 +1060,10 @@ a {
   color: var(--ardesia-soft);
 }
 
+.steps + .button {
+  margin-top: 0.5rem;
+}
+
 /* ---------- FAQ ---------- */
 .faq details {
   border-bottom: 1px solid var(--linea);
@@ -999,6 +1106,11 @@ a {
   color: var(--ardesia-soft);
 }
 
+.faq__more {
+  margin-top: 1.5rem;
+  color: var(--ardesia-soft);
+}
+
 /* ---------- Richiamo finale ---------- */
 .cta {
   background: var(--ardesia);
@@ -1031,6 +1143,10 @@ a {
   .reasons {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .inverno__switch {
+    display: inline-grid;
+  }
 }
 
 @media (min-width: 60rem) {
@@ -1061,9 +1177,17 @@ a {
     max-width: 44rem;
   }
 
+  /* Colonna sinistra: introduzione sopra, impegni sotto. Colonna destra: il form, alto quanto le due righe.
+     La seconda riga prende lo spazio in più, così l'introduzione resta attaccata agli impegni. */
   .prenota {
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-rows: auto 1fr;
+    gap: 2.5rem 4rem;
+  }
+
+  .form-panel {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 
   .split {
