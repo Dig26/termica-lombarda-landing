@@ -10,7 +10,7 @@ Il codice l'ha scritto Claude Code. Io ho deciso cosa fare e ho approvato le pro
 - La skill `frontend-design` di Anthropic, per avere un piano grafico prima di scrivere codice.
 - GitHub per il codice, con commit piccoli. Il sito è pubblicato con GitHub Pages dal branch `main`: gratis e si aggiorna a ogni push.
 - Le modifiche grosse le facevo su un branch di prova: se mi convincevano facevo il merge su `main`, altrimenti cancellavo il branch.
-- Alla fine ho aperto una seconda sessione di Claude Code senza contesto, per far valutare la pagina da zero e migliorarne l'aspetto grafico. Da lì sono venuti gli ultimi accorgimenti.
+- Alla fine ho aperto una seconda sessione di Claude Code senza contesto, per far valutare la pagina da zero e migliorarne la grafica e la capacità di portare contatti (lead). Da lì sono venuti gli ultimi accorgimenti.
 - Claude Code mi ha proposto una piccola correzione di accessibilità (gli screen reader leggevano troppe volte la cifra dello slider della bolletta) e già che c'ero gli ho dato l'ok.
 
 ## Linguaggi
