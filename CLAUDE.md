@@ -34,7 +34,7 @@ Obiettivo unico della pagina: far richiedere un **sopralluogo gratuito**.
 
 ## Qualità minima
 - Responsive da 320px in su, nessuno scorrimento orizzontale.
-- Accessibilità: contrasto WCAG AA, focus visibile, label su ogni campo, errori annunciati, `prefers-reduced-motion` rispettato. La velatura dell'hero è tarata per tenere il testo bianco sopra 4,5:1 sulla foto: se cambia la foto va rimisurata.
+- Accessibilità: contrasto WCAG AA, focus visibile, label su ogni campo, errori annunciati, `prefers-reduced-motion` rispettato. La velatura dell'hero non scende sotto 0,60 di opacità: così il testo bianco resta sopra 4,5:1 anche su un punto bianco della foto.
 - Meta SEO e Open Graph in `<head>`.
 
 ## Processo
@@ -42,4 +42,4 @@ Obiettivo unico della pagina: far richiedere un **sopralluogo gratuito**.
 - Anteprima locale: avviare `python3 -m http.server 8000` dalla cartella del progetto via terminale (il server lanciato da `.claude/launch.json` non ha i permessi su Documenti), poi aprire `http://localhost:8000`.
 - Verifica visiva a larghezza mobile e desktop, console senza errori.
 - Commit piccoli, messaggi in italiano.
-- `DECISIONI.md` documenta le scelte tecniche (strumenti, linguaggi, struttura), non i contenuti.
+- `DECISIONI.MD` documenta le scelte tecniche (strumenti, linguaggi, struttura), non i contenuti.

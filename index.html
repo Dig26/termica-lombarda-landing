@@ -180,7 +180,8 @@
             <label class="bolletta__label" for="spesa-gas">Quanto spendi di gas in un anno per il riscaldamento?</label>
             <div class="bolletta__input">
               <input id="spesa-gas" type="range" min="400" max="3000" step="50" value="1350">
-              <output id="spesa-gas-valore" for="spesa-gas">1.350 €</output>
+              <!-- aria-live="off": <output> verrebbe annunciato a ogni passo; valore e risultato li legge già lo slider (aria-valuetext) -->
+              <output id="spesa-gas-valore" for="spesa-gas" aria-live="off">1.350 €</output>
             </div>
 
             <div class="bolletta__rows">
